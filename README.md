@@ -19,7 +19,7 @@ This Python script allows you to convert an entire GitHub repository into a sing
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/github-repo-to-markdown.git
+   git clone https://github.com/Ono-Katsuki/Consolidate-Repository-Files-into-Markdown.git
    cd github-repo-to-markdown
    ```
 
@@ -38,7 +38,7 @@ This Python script allows you to convert an entire GitHub repository into a sing
 Run the script using Python:
 
 ```
-python github_repo_to_markdown.py
+python main.py
 ```
 
 Follow the prompts to enter the GitHub repository (in the format `owner/repo`) and the desired output filename.
