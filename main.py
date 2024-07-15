@@ -74,19 +74,43 @@ def process_directory(repo, path, output_file, depth=0):
     for content in sorted(files, key=lambda x: x.path):
         process_file(repo, content.path, output_file, depth)
 
+def get_user_repositories(g):
+    user = g.get_user()
+    repos = user.get_repos()
+    return list(repos)
+
+def display_repositories(repos):
+    print("Your repositories:")
+    for i, repo in enumerate(repos, 1):
+        print(f"{i}. {repo.full_name}")
+
+def get_user_choice(repos):
+    while True:
+        try:
+            choice = int(input("Enter the number of the repository you want to convert: "))
+            if 1 <= choice <= len(repos):
+                return repos[choice - 1]
+            else:
+                print("Invalid choice. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
 def main():
     load_dotenv()
     github_token = os.getenv('GITHUB_TOKEN')
-    repository = input("Enter the GitHub repository (format: owner/repo): ")
-    output_filename = input("Enter the output Markdown filename: ")
-
+    
     g = Github(github_token)
-    repo = g.get_repo(repository)
-
+    
+    repos = get_user_repositories(g)
+    display_repositories(repos)
+    selected_repo = get_user_choice(repos)
+    
+    output_filename = input("Enter the output Markdown filename: ")
+    
     with open(output_filename, 'w', encoding='utf-8') as output_file:
-        output_file.write(f"# Repository: {repository}\n\n")
-        process_directory(repo, "", output_file)
-
+        output_file.write(f"# Repository: {selected_repo.full_name}\n\n")
+        process_directory(selected_repo, "", output_file)
+    
     print(f"Repository contents have been saved to {output_filename}")
 
 if __name__ == "__main__":
