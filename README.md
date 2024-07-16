@@ -56,7 +56,7 @@ Run the script using Python:
 python main.py
 ```
 
-Follow the prompts to enter the GitHub repository (in the format `owner/repo`) and the desired output filename.
+The script will display a list of your repositories. Enter the number corresponding to the repository you want to convert.
 
 ## Output
 
